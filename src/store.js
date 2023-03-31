@@ -21,4 +21,6 @@ export const store = reactive({
     seriesTvList: [],
 
     searchByText: "",
+
+    icons: [],
 });

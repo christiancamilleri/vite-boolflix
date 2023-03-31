@@ -26,6 +26,17 @@ export default {
             }
 
             return language
+        },
+        transformVoteInInt(serie) {
+            let numInt = Math.round(serie.vote_average);
+
+            if (numInt > 5) {
+                numInt = 5
+            }
+
+            return numInt
+
+
         }
     }
 
@@ -34,12 +45,17 @@ export default {
 
 <template>
     <div id="series-list">
+        <div id="img-container">
+
+            <img :src="`https://image.tmdb.org/t/p/w500${serie.poster_path}`" alt="">
+
+        </div>
 
         <h2>{{ serie.name }}</h2>
         <small>{{ serie.original_name }}</small>
         <small>Lingua: <span :class="`fi fi-${flagEmoji()} fis`"></span>
         </small>
-        <small>Voto: {{ serie.vote_average }}</small>
+        <small>Voto: {{ transformVoteInInt(serie) }}</small>
 
     </div>
 </template>
@@ -47,8 +63,18 @@ export default {
 <style lang="scss" scoped>
 #series-list {
 
-
     display: flex;
     flex-direction: column;
+    height: 100%;
+
+    #img-container {
+        height: 100%;
+
+        img {
+            width: 100%;
+            min-height: 270px;
+            max-height: 500px;
+        }
+    }
 }
 </style>

@@ -78,7 +78,28 @@ export default {
 
 
             });
-        }
+        },
+        changePageSerieBack() {
+            this.store.path = "/search/tv";
+            this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
+
+
+            if (this.store.actualSeriesPage == 1) {
+                this.store.actualSeriesPage = 1
+            } else {
+                this.store.actualSeriesPage--;
+            }
+
+            // console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
+
+            axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters + this.store.pagePath + this.store.actualSeriesPage).then((res) => {
+                console.log(res.data.results)
+
+                this.store.seriesTvList = res.data.results
+
+
+            });
+        },
     }
 }
 
@@ -98,7 +119,7 @@ export default {
 
             <div id="btn" v-if="store.APImoviesPages > 1">
                 <button @click="changePageMovieBack()" id="page-btn"> back </button>
-                <span>{{ store.actualMoviesPage }} / {{ store.APImoviesPages }}</span>
+
             </div>
 
             <div id="btn" v-if="store.APImoviesPages > 1">
@@ -123,7 +144,7 @@ export default {
 
             <div id="btn" v-if="store.APIseriesPages > 1">
                 <button @click="changePageSerieBack()" id="page-btn"> back </button>
-                <span>{{ store.actualSeriesPage }} / {{ store.APIseriesPages }}</span>
+
             </div>
 
             <div id="btn" v-if="store.APIseriesPages > 1">
@@ -155,7 +176,7 @@ export default {
             width: calc(100% / 6);
             border: 1px solid white;
 
-            height: 200px;
+            height: 500px;
 
             overflow: auto;
 
@@ -186,6 +207,7 @@ export default {
 
 #series-list {
 
+    height: 100%;
 
     h1 {
         color: red;
@@ -194,14 +216,15 @@ export default {
     ul {
         display: flex;
         flex-flow: row wrap;
-        align-content: stretch;
+        gap: 2em 0;
+        height: 100%;
 
 
         li {
             width: calc(100% / 6);
             border: 1px solid white;
 
-            height: 200px;
+            height: 500px;
 
             overflow: auto;
 
