@@ -5,6 +5,7 @@ export const store = reactive({
 
     APIkey: "?api_key=dca477681a1e08199e8717b68c86d599",
 
+
     path: "",
 
     APImoviesPages: "",
@@ -16,11 +17,16 @@ export const store = reactive({
 
     queryParameters: "",
 
+    movies: [],
+    series: [],
+
     moviesList: [],
 
     seriesTvList: [],
 
     searchByText: "",
 
-    icons: [],
+    stars: 5,
+
+    index: 0,
 });

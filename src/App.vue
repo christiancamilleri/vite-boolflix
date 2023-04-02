@@ -18,41 +18,64 @@ export default {
         AppMain,
         AppFooter,
     },
+    created() {
+        if (this.store.index == 0) {
+
+            this.store.path = "/trending/movie/week";
+
+            axios.get(this.store.APIstandard + this.store.path + this.store.APIkey).then((res) => {
+                this.store.movies = res.data.results;
+
+
+            })
+        }
+
+        this.store.path = "/trending/tv/week"
+        axios.get(this.store.APIstandard + this.store.path + this.store.APIkey).then((res) => {
+            this.store.series = res.data.results
+        })
+
+
+    },
 
     methods: {
         searchMovie() {
-            this.store.path = "/search/movie";
-            this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
+            if (this.store.index == 2 || this.store.index == 0) {
 
-            // console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
+                this.store.path = "/search/movie";
+                this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
 
-            axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
-                console.log(res.data)
+                // console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
 
-                this.store.actualMoviesPage = res.data.page
-                this.store.APImoviesPages = res.data.total_pages;
-                this.store.moviesList = res.data.results;
+                axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
+                    console.log(res.data)
 
-                console.log("numero pagine=" + this.store.APIpage)
+                    this.store.actualMoviesPage = res.data.page
+                    this.store.APImoviesPages = res.data.total_pages;
+                    this.store.moviesList = res.data.results;
 
 
-            });
+                });
+            }
         },
 
         searchSerie() {
-            this.store.path = "/search/tv";
-            this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
+            if (this.store.index == 1 || this.store.index == 0) {
+                this.store.path = "/search/tv";
+                this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
 
-            console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
+                console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
 
-            axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
-                console.log(res.data.results)
+                axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
+                    console.log(res.data.results)
 
-                this.store.APIseriesPages = res.data.total_pages;
-                this.store.actualSeriesPage = res.data.page;
+                    this.store.APIseriesPages = res.data.total_pages;
+                    this.store.actualSeriesPage = res.data.page;
 
-                this.store.seriesTvList = res.data.results
-            })
+                    this.store.seriesTvList = res.data.results
+                })
+
+            }
 
 
         }
@@ -65,6 +88,7 @@ export default {
         <AppHeader @searchMovie="searchMovie(), searchSerie()"></AppHeader>
         <AppMain></AppMain>
         <AppFooter></AppFooter>
+
     </div>
 </template>
 
