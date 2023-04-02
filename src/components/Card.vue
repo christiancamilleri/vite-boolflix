@@ -1,10 +1,12 @@
 <script>
 import { store } from "../store.js";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default {
     data() {
         return {
             store,
+            viewDetails: false,
         }
     },
     props: {
@@ -52,18 +54,22 @@ export default {
 </script>
 
 <template>
-    <div id="card">
+    <div id="card" @mouseover="viewDetails = true" @mouseleave="viewDetails = false">
         <div id="img-container" v-if="!card.poster_path == ``">
             <img :src="`https://image.tmdb.org/t/p/original${card.poster_path}`" alt="">
         </div>
         <div v-else class="unknow"> <span>immagine non disponibile</span> </div>
 
-        <div id="card-info">
+        <div id="card-info" v-show="viewDetails">
             <div class="text">{{ card.title }} {{ card.name }}</div>
-            <div class="text">{{ card.original_title }} {{ card.original_name }}</div>
+            <div class="text">( {{ card.original_title }} {{ card.original_name }} )</div>
             <div class="text">Lingua: <span :class="`fi fi-${flagEmoji()} fis`"></span> </div>
             <div class="text"> <i v-for="star in showStars()" class="fa-solid fa-star" :class="star ? `yellow` : ``"></i>
             </div>
+            <!-- <div class="description">
+                            <span v-if="!card.overview == ''"><strong>Descrizione:</strong> {{ card.overview }} </span>
+                            <span v-else><strong>Descrizione:</strong> Non disponibile</span>
+                        </div> -->
 
         </div>
 
@@ -72,39 +78,84 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-    margin-bottom: 80px;
 
-    width: calc(100% / 6 - 20px / 6 * 5);
-    font-size: 0.7em;
-    transition: all .2s ease-in-out;
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 20px;
+    width: calc(20% - 30px);
+    height: auto;
+    cursor: pointer;
+    background-color: rgba(56, 56, 56, 0.151);
+    overflow: hidden;
 
-    #img-container {
+
+
+    .unknow {
+        text-align: center;
+        margin-top: 5em;
+    }
+
+    #card:hover .unknown {
+        opacity: 0;
+        transition: 1s linear all;
+    }
+
+    #img-container:hover {
+
+        position: relative;
+        z-index: 2;
+        transition: 1s linear all;
+        transform: scale(1.2);
+
+
+    }
+
+    img {
         width: 100%;
-
-        img {
-            width: 100%;
-        }
+        height: 100%;
+        object-fit: cover;
     }
 
     #card-info {
-        position: relative;
-        padding: 10px 10px;
-        width: 100%;
-        min-height: 125px;
-        border-radius: 0 0 20px 20px;
-        background-color: #181818;
+        display: none;
 
-        .text {
-            font-size: 1.2em;
+        :hover & {
+            display: flex;
+            flex-flow: column wrap;
+            gap: 20px;
+
+            padding: 20px;
+            color: white;
+
+            margin-bottom: 1em;
         }
     }
 
-    .unknow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
-        height: 300px
+    &:hover {
+
+        border: 2px solid #181818;
+        border-radius: 20px;
+        box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.6);
+
+
+
     }
+
+    &:hover #card-info {
+        position: absolute;
+        bottom: -20px;
+
+
+    }
+
+    &:hover img {
+        opacity: .2;
+        transform: scale(1);
+        overflow: hidden;
+    }
+
+
 }
 </style>

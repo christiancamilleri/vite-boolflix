@@ -61,13 +61,13 @@ export default {
     <div id="bottoni">
 
         <div id="btn" v-if="store.APIseriesPages > 1">
-            <button @click="changePageSerieBack()" id="page-btn"> back </button>
+            <button @click="changePageSerieBack()" id="page-btn"><i class="fa-solid fa-arrow-left"></i> </button>
 
         </div>
 
         <div id="btn" v-if="store.APIseriesPages > 1">
-            <button @click="changePageSerie()" id="page-btn"> -> </button>
-            <span>{{ store.actualSeriesPage }} / {{ store.APIseriesPages }}</span>
+            <button @click="changePageSerie()" id="page-btn"><i class="fa-solid fa-arrow-right"></i> </button>
+            <span class="num-page">{{ store.actualSeriesPage }} / {{ store.APIseriesPages }}</span>
         </div>
 
     </div>

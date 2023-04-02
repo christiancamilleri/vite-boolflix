@@ -61,33 +61,16 @@ export default {
     <div id="bottoni">
 
         <div id="btn" v-if="store.APImoviesPages > 1">
-            <button @click="changePageMovieBack()" id="page-btn"> back </button>
+            <button @click="changePageMovieBack()" id="page-btn"> <i class="fa-solid fa-arrow-left"></i> </button>
 
         </div>
 
         <div id="btn" v-if="store.APImoviesPages > 1">
-            <button @click="changePageMovie()" id="page-btn"> -> </button>
-            <span>{{ store.actualMoviesPage }} / {{ store.APImoviesPages }}</span>
+            <button @click="changePageMovie()" id="page-btn"> <i class="fa-solid fa-arrow-right"></i> </button>
+            <span class="num-page">{{ store.actualMoviesPage }} / {{ store.APImoviesPages }}</span>
         </div>
 
     </div>
 </template>
 
-<style lang="scss" scoped>
-#bottoni {
-    display: flex;
-    gap: 1em;
-    justify-content: flex-end;
-
-    #btn {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        margin-right: 1em;
-
-        #page-btn {
-            width: 100px;
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>
