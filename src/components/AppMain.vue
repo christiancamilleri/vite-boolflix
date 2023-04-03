@@ -2,7 +2,7 @@
 
 import ChangePage from './ChangePage.vue';
 import ChangePageSeries from './ChangePageSeries.vue';
-import Card from './Card.vue';
+import CardItem from './CardItem.vue';
 
 import { store } from '../store.js';
 import axios from 'axios';
@@ -17,7 +17,7 @@ export default {
 
         ChangePage,
         ChangePageSeries,
-        Card,
+        CardItem,
     },
     methods: {
 
@@ -34,11 +34,11 @@ export default {
                 Film in tendenza questa settimana
             </div>
             <div class="card-container">
-                <Card v-for="film in this.store.movies" :card="film"></Card>
+                <CardItem v-for="film in this.store.movies" :card="film"></CardItem>
             </div>
             <div class="type">Serie TV in tendenza questa settimana</div>
             <div class="card-container">
-                <Card v-for="serie in this.store.series" :card="serie"></Card>
+                <CardItem v-for="serie in this.store.series" :card="serie"></CardItem>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ export default {
             Scrivi un titolo nella barra della ricerca
         </div>
         <div v-else class="card-container">
-            <Card v-for="film in this.store.moviesList" :card="film"></Card>
+            <CardItem v-for="film in this.store.moviesList" :card="film"></CardItem>
         </div>
         <ChangePage></ChangePage>
     </div>
@@ -60,7 +60,7 @@ export default {
             Scrivi un titolo nella barra della ricerca
         </div>
         <div v-else class="card-container">
-            <Card v-for="serie in this.store.seriesTvList" :card="serie"></Card>
+            <CardItem v-for="serie in this.store.seriesTvList" :card="serie"></CardItem>
         </div>
         <ChangePageSeries></ChangePageSeries>
     </div>

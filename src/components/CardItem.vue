@@ -7,6 +7,7 @@ export default {
         return {
             store,
             viewDetails: false,
+
         }
     },
     props: {
@@ -66,10 +67,10 @@ export default {
             <div class="text">Lingua: <span :class="`fi fi-${flagEmoji()} fis`"></span> </div>
             <div class="text"> <i v-for="star in showStars()" class="fa-solid fa-star" :class="star ? `yellow` : ``"></i>
             </div>
-            <!-- <div class="description">
-                            <span v-if="!card.overview == ''"><strong>Descrizione:</strong> {{ card.overview }} </span>
-                            <span v-else><strong>Descrizione:</strong> Non disponibile</span>
-                        </div> -->
+            <div class="description">
+                <span v-if="!card.overview == ''"><strong>Descrizione:</strong> {{ card.overview }} </span>
+                <span v-else><strong>Descrizione:</strong> Non disponibile</span>
+            </div>
 
         </div>
 
@@ -119,11 +120,18 @@ export default {
 
     #card-info {
         display: none;
+        overflow-x: scroll;
+
+
 
         :hover & {
             display: flex;
-            flex-flow: column wrap;
+            flex-flow: column;
             gap: 20px;
+
+            height: 100%;
+
+
 
             padding: 20px;
             color: white;
@@ -153,7 +161,7 @@ export default {
     &:hover img {
         opacity: .2;
         transform: scale(1);
-        overflow: hidden;
+        // overflow: hidden;
     }
 
 

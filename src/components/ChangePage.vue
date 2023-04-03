@@ -36,9 +36,7 @@ export default {
             this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
 
 
-            if (this.store.actualMoviesPage == 1) {
-                this.store.actualMoviesPage = 1
-            } else {
+            if (this.store.actualMoviesPage != 1) {
                 this.store.actualMoviesPage--;
             }
 
