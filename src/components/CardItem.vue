@@ -62,7 +62,9 @@ export default {
         <div v-else class="unknow"> <span>immagine non disponibile</span> </div>
 
         <div id="card-info" v-show="viewDetails">
-            <div class="text">{{ card.title }} {{ card.name }}</div>
+            <div class="text">
+                <h2>{{ card.title }} {{ card.name }}</h2>
+            </div>
             <div class="text">( {{ card.original_title }} {{ card.original_name }} )</div>
             <div class="text">Lingua: <span :class="`fi fi-${flagEmoji()} fis`"></span> </div>
             <div class="text"> <i v-for="star in showStars()" class="fa-solid fa-star" :class="star ? `yellow` : ``"></i>
