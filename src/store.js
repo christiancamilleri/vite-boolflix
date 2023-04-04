@@ -29,4 +29,6 @@ export const store = reactive({
     stars: 5,
 
     index: 0,
+
+
 });

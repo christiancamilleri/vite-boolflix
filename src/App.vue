@@ -27,6 +27,7 @@ export default {
                 this.store.movies = res.data.results;
 
 
+
             })
         }
 
@@ -48,12 +49,10 @@ export default {
                 // console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
 
                 axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
-                    console.log(res.data)
 
                     this.store.actualMoviesPage = res.data.page
                     this.store.APImoviesPages = res.data.total_pages;
                     this.store.moviesList = res.data.results;
-
 
                 });
             }
@@ -64,10 +63,7 @@ export default {
                 this.store.path = "/search/tv";
                 this.store.queryParameters = `&query=${encodeURIComponent(this.store.searchByText)}`
 
-                console.log(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters)
-
                 axios.get(this.store.APIstandard + this.store.path + this.store.APIkey + this.store.queryParameters).then((res) => {
-                    console.log(res.data.results)
 
                     this.store.APIseriesPages = res.data.total_pages;
                     this.store.actualSeriesPage = res.data.page;

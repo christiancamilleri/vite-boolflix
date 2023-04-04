@@ -5,7 +5,7 @@ import ChangePageSeries from './ChangePageSeries.vue';
 import CardItem from './CardItem.vue';
 
 import { store } from '../store.js';
-import axios from 'axios';
+
 
 export default {
     data() {
@@ -34,11 +34,11 @@ export default {
                 Film in tendenza questa settimana
             </div>
             <div class="card-container">
-                <CardItem v-for="film in this.store.movies" :card="film"></CardItem>
+                <CardItem v-for="film in this.store.movies" :type="'movie'" :id="film.id" :card="film"></CardItem>
             </div>
             <div class="type">Serie TV in tendenza questa settimana</div>
             <div class="card-container">
-                <CardItem v-for="serie in this.store.series" :card="serie"></CardItem>
+                <CardItem v-for="serie in this.store.series" :type="'serie'" :id="serie.id" :card="serie"></CardItem>
             </div>
         </div>
     </div>
@@ -46,10 +46,10 @@ export default {
     <!-- film -->
     <div v-show="this.store.index == 2">
         <div v-if="this.store.moviesList.length <= 0" class="type">
-            Scrivi un titolo nella barra della ricerca
+            Scrivi un titolo nella barra diricerca
         </div>
         <div v-else class="card-container">
-            <CardItem v-for="film in this.store.moviesList" :card="film"></CardItem>
+            <CardItem v-for="film in this.store.moviesList" :type="'movie'" :id="film.id" :card="film"></CardItem>
         </div>
         <ChangePage></ChangePage>
     </div>
@@ -57,10 +57,10 @@ export default {
     <!-- serie -->
     <div v-show="this.store.index == 1">
         <div v-if="this.store.seriesTvList.length <= 0" class="type">
-            Scrivi un titolo nella barra della ricerca
+            Scrivi un titolo nella barra di ricerca
         </div>
         <div v-else class="card-container">
-            <CardItem v-for="serie in this.store.seriesTvList" :card="serie"></CardItem>
+            <CardItem v-for="serie in this.store.seriesTvList" :type="'tv'" :id="serie.id" :card="serie"></CardItem>
         </div>
         <ChangePageSeries></ChangePageSeries>
     </div>
