@@ -10,6 +10,7 @@ export default {
             viewDetails: false,
             showDetails: false,
             actorsArray: [],
+            genres: [],
 
 
         }
@@ -69,6 +70,13 @@ export default {
 
             })
 
+            let queryGenres = this.store.APIstandard + "/" + this.type + "/" + this.id + this.store.APIkey
+
+            axios.get(queryGenres).then((res) => {
+                this.genres = res.data.genres
+            })
+
+
         },
 
     }
@@ -98,6 +106,8 @@ export default {
         </div>
 
     </div>
+
+
     <div id="details" v-show="showDetails" @click="showDetails = false">
         <img :src="`https://image.tmdb.org/t/p/original${card.poster_path}`" alt="">
         <div id="card-info-details">
@@ -113,12 +123,24 @@ export default {
             <div>
                 Voto: <i v-for="star in showStars()" class="fa-solid fa-star" :class="star ? `yellow` : ``"></i>
             </div>
-            <div>
+            <div id="overview">
                 <span v-if="!card.overview == ''"><strong>Descrizione:</strong> {{ card.overview }} </span>
                 <span v-else><strong>Descrizione:</strong> Non disponibile</span>
             </div>
-            <div>
-                cast: <span v-for="actor in actorsArray"> {{ actor.name }}, </span>
+            <div class="text">
+                cast:
+                <ul>
+                    <li v-for="actor in actorsArray">
+                        {{ actor.name }}
+                    </li>
+                </ul>
+            </div>
+            <div class="text">
+                genere: <ul>
+                    <li v-for="genre in genres">
+                        {{ genre.name }}
+                    </li>
+                </ul>
             </div>
 
 
@@ -187,6 +209,8 @@ export default {
 
             margin-bottom: 1em;
         }
+
+
     }
 
 
@@ -221,9 +245,11 @@ export default {
     display: flex;
     border: 2px solid red;
 
+
     img {
         width: 200px;
         height: 300px;
+        margin-top: 2em;
     }
 
     #card-info-details {
@@ -241,5 +267,14 @@ export default {
         margin-bottom: 1em;
     }
 
+}
+
+.text {
+    display: flex;
+
+    ul {
+        display: flex;
+        gap: 5px;
+    }
 }
 </style>
