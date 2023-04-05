@@ -38,7 +38,7 @@ export default {
             </div>
             <div class="type">Serie TV in tendenza questa settimana</div>
             <div class="card-container">
-                <CardItem v-for="serie in this.store.series" :type="'serie'" :id="serie.id" :card="serie"></CardItem>
+                <CardItem v-for="serie in this.store.series" :type="'tv'" :id="serie.id" :card="serie"></CardItem>
             </div>
         </div>
     </div>
